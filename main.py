@@ -50,5 +50,8 @@ def load_data() -> Dict[str, str]:
 
 
 def save_data(data: Dict[int, datetime]):
-pass
+    serial = {str(uid): ts.isoformat() for uid, ts in data.items()}
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(serial, f, ensure_ascii=False, indent=2)
+
 
