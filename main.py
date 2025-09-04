@@ -35,20 +35,16 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 # -------------------- Persistence helpers --------------------
 
 
-def now_utc() -> datetime:
-return datetime.now(timezone.utc)
-
-
 def load_data() -> Dict[str, str]:
-if not os.path.exists(DATA_FILE):
-return {}
-try:
-with open(DATA_FILE, "r", encoding="utf-8") as f:
-raw = json.load(f)
-# Expect {str(user_id): iso_timestamp}
-return {k: v for k, v in raw.items() if isinstance(v, str)}
-except Exception:
-return {}
+    if not os.path.exists(DATA_FILE):
+        return {}
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+            # Expect {str(user_id): iso_timestamp}
+            return {k: v for k, v in raw.items() if isinstance(v, str)}
+    except Exception:
+        return {}
 
 
 
